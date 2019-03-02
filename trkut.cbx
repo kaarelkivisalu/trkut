@@ -1,16 +1,21 @@
+% Põhineb stiilil authoryear-ibid
+% https://github.com/plk/biblatex/blob/dev/tex/latex/biblatex/cbx/authoryear-ibid.cbx
 \ProvidesFile{trkut.cbx}
 
-\ExecuteBibliographyOptions{labeldateparts,uniquename=init,uniquelist,pagetracker,
-                            ibidtracker=constrict,maxcitenames=2,mincitenames=1,autocite=inline}
+\ExecuteBibliographyOptions{labeldateparts,uniquename=init,uniquelist,pagetracker,ibidtracker=constrict,maxcitenames=2,mincitenames=1,autocite=inline}
+
 \providecommand*{\mkibid}[1]{#1}
+\DefineBibliographyStrings{english}{%
+  ibidem = {\textit{Ibid.}}
+}
+
 \newbool{cbx:parens}
 \newbool{cbx:loccit}
 
-\DeclareBibliographyOption{ibidpage}[true]{%
+\DeclareBibliographyOption[boolean]{ibidpage}[true]{%
   \ifstrequal{#1}{true}
     {\ExecuteBibliographyOptions{loccittracker=constrict}}
     {\ExecuteBibliographyOptions{loccittracker=false}}}
-
 
 % Käsk pealkirjade lühendamiseks lõpetades punktiiriga
 \def\@threefirstwords #1 #2 #3 #4\\#5{%
@@ -117,14 +122,14 @@
        {\addspace\bibopenparen}%
      \printfield{postnote}\bibcloseparen}}
 
-\DeclareCiteCommand{\cite}[\mkbibparens]
+\DeclareCiteCommand{\cite}
   {\usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
    \usebibmacro{cite}}
   {\multicitedelim}
   {\usebibmacro{cite:postnote}}
 
-\DeclareCiteCommand*{\cite}[\mkbibparens]
+\DeclareCiteCommand*{\cite}
   {\usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
    \usebibmacro{citeyear}}
@@ -176,18 +181,18 @@
    \multicitedelim}
   {\usebibmacro{textcite:postnote}}
 
-% leheküljenumbrid
+% Leheküljenumbrid
 \DeclareFieldFormat{pages}{lk #1}
 
-% nimega viitamisel pole kaldkirja, aga ainult kolm esimest sõna
+% Nimega viitamisel pole kaldkirja, aga ainult kolm esimest sõna
 \DeclareFieldFormat{citetitle}{\threefirstwords{#1}{\dots}}
 \DeclareFieldFormat[article,book,misc,customa,online]{citetitle}{\threefirstwords{#1}{\dots}}
 
-% tsiteerimissulgudes enne aastat on koolon ja enne leheküljenumbrit koma
+% Tsiteerimissulgudes enne aastat on koolon ja enne leheküljenumbrit koma
 \renewcommand{\postnotedelim}{: }
 \renewcommand{\finalnamedelim}{, }
 
-% leheküljenumbrite ette viidetes ei lisata "p. " vms
+% Leheküljenumbrite ette viidetes ei lisata "p. " vms
 \DeclareFieldFormat{postnote}{#1}
 
 \newbibmacro*{longcite}{%
