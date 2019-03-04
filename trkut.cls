@@ -14,7 +14,6 @@
 \LoadClass[oneside, 12pt, headings=small, numbers=noendperiod]{scrreprt}% Numbrite vahel ja lõpus on punkt, chapter font large, 12pt.
 
 \RequirePackage{etoolbox}% Scriptimismacrod
-\RequirePackage{lmodern}%
 \RequirePackage{polyglossia}% Eesti keele tugi
 \setdefaultlanguage{estonian}
 \RequirePackage{csquotes}% Eesti jutumärgid käsuga \enquote{}

@@ -30,11 +30,9 @@
   \iffieldundef{shorthand}
     {\ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
        {\usebibmacro{cite:ibid}}%
-       {\StrLeft{\strfield{labeltitle}}{4}[\maybesv]%
+       {\StrLeft{\strfield{labeltitle}}{14}[\maybesv]%
        % TODO HACK: detects A.A. as s.v. where A is any letter
-       \StrPosition{\maybesv}{.}[\kaks]%
-       \StrPosition[2]{\maybesv}{.}[\neli]%
-        \IfStrEq{\kaks\neli}{24}
+        \IfStrEq{\maybesv}{\detokenize{\textit{s.v.}}}
          {\printnames{labelname}
          \setunit{\nameyeardelim}%
          \ifthenelse{\ifnameundef{year}}{\printfield{urlyear}}{\printfield{year}}%
